@@ -8,6 +8,7 @@
 ## 如何使用 Quick start
 ```python
 >>> from youshallnotuseit import *
+
 >>> print('hello world')
 hello world
 >>> lock(print)
@@ -17,11 +18,14 @@ Traceback (most recent call last):
   File "D:\Projects\PythonProject\youshallnotuseit\covers\Functions.py", line 7, in LockedFunction
     raise YouShallNotUseIt(lang.func.locked)
 youshallnotuseit.covers.Exceptions.YouShallNotUseIt: This Function is Locked
+
 >>> help(print)
 Help on function LockedFunction in module youshallnotuseit.covers.Functions:
 
 LockedFunction(*args, **kwargs) -> NoReturn
     This Function is Locked
+
+
 >>> unlock('print')
 >>> print('hello world')
 hello world
