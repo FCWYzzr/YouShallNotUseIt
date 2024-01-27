@@ -1,5 +1,4 @@
 from typing import Union
-from .Overrider import Overrider
 from ..covers import *
 
 __all__ = [

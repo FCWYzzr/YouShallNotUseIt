@@ -1,4 +1,5 @@
 from typing import Any
+from sys import _getframe
 
 __all__ = [
     "Overrider"
@@ -6,7 +7,7 @@ __all__ = [
 
 
 class Overrider:
-    BI: Any = __builtins__
+    BI: Any
 
     @staticmethod
     def read(name: str) -> Any:
@@ -28,6 +29,17 @@ class Overrider:
         Overrider.write(name, value)
         return origin
 
+
+import_frame_cost = 0
+f = _getframe()
+while True:
+    import_frame_cost += 1
+    f = f.f_back
+    if f.f_locals.get("__file__", "").endswith(".py"):
+        break
+
+
+Overrider.BI = _getframe(import_frame_cost * 3).f_locals["__builtins__"]
 
 if isinstance(Overrider.BI, dict):
     def __read(name):
